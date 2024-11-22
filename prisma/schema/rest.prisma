@@ -1,0 +1,22 @@
+model Area {
+    id      Int      @id @default(autoincrement())
+    name    String   @unique
+    persons Person[]
+    hiringRequests HiringRequest[]
+}
+
+model Salary {
+    id       Int       @id @default(autoincrement())
+    currency String
+    from     Int?
+    to       Int?
+    vacancies Vacancy[]
+    hiringRequests HiringRequest[]
+}
+
+model Department {
+    id        Int       @id @default(autoincrement())
+    name      String    @unique
+    vacancies Vacancy[]
+    hiringRequests HiringRequest[]
+}

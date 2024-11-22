@@ -1,0 +1,13 @@
+model Application {
+    id               Int            @id @default(autoincrement())
+    person           Person         @relation("PersonApplications", fields: [personId], references: [id], onDelete: Cascade)
+    personId         Int
+    vacancy          Vacancy        @relation("VacancyApplications", fields: [vacancyId], references: [id], onDelete: Cascade)
+    vacancyId        Int
+    workflowStatus   WorkflowStatus @relation("WorkflowStatusApplications", fields: [workflowStatusId], references: [id], onDelete: Cascade)
+    workflowStatusId Int
+    createdAt        DateTime       @default(now())
+    updatedAt        DateTime       @updatedAt
+
+    @@unique([personId, vacancyId, workflowStatusId], name: "unique_application")
+}

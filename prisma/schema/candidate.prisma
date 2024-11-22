@@ -1,0 +1,36 @@
+model Source {
+    id      Int      @id @default(autoincrement())
+    name    String   @unique
+    persons Person[]
+}
+
+model Photo {
+    id       Int    @id @default(autoincrement())
+    url      String
+    person   Person @relation(fields: [personId], references: [id])
+    personId Int
+}
+
+model Contact {
+    id       Int    @id @default(autoincrement())
+    type     String
+    value    String
+    person   Person @relation(fields: [personId], references: [id])
+    personId Int
+}
+
+model Person {
+    id           Int           @id
+    firstName    String
+    middleName   String?
+    lastName     String?
+    age          Int?
+    birthDay     DateTime?
+    area         Area?         @relation(fields: [areaId], references: [id])
+    areaId       Int?
+    source       Source?       @relation(fields: [sourceId], references: [id])
+    sourceId     Int?
+    photos       Photo[]
+    contacts     Contact[]
+    applications Application[] @relation("PersonApplications")
+}

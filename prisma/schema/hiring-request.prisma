@@ -1,0 +1,13 @@
+model HiringRequest {
+    id              Int              @id  
+    createdAt       DateTime
+    department      Department?      @relation(fields: [departmentId], references: [id])
+    departmentId    Int?
+    description     String
+    name            String
+    areas           Area[]
+    salary          Salary?          @relation(fields: [salaryId], references: [id])
+    salaryId        Int?
+    vacancy         Vacancy?          @relation(fields: [vacancyId], references: [id])
+    vacancyId       Int?
+}

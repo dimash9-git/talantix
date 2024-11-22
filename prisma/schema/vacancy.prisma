@@ -1,0 +1,21 @@
+model Vacancy {
+    id             Int              @id
+    title          String
+    createdAt      DateTime
+    status         String
+    department     Department?      @relation(fields: [departmentId], references: [id])
+    departmentId   Int?
+    salary         Salary?          @relation(fields: [salaryId], references: [id])
+    salaryId       Int?
+    workflowStatus WorkflowStatus[]
+    applications   Application[]    @relation("VacancyApplications")
+    hiringRequests HiringRequest[]
+}
+
+model WorkflowStatus {
+    id           Int           @id
+    name         String
+    vacancy      Vacancy       @relation(fields: [vacancyId], references: [id])
+    vacancyId    Int
+    applications Application[] @relation("WorkflowStatusApplications")
+}
